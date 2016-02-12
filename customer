@@ -1,0 +1,28 @@
+<?php
+    
+    $dbhandle = oci_connect("ora_r3v8", "a21491139", "ug");
+    if (!$dbhandle) {
+        $m = oci_error();
+        echo $m['message'], "\n";
+        exit;
+    }
+    else {
+        
+    }
+    $myemployeeid = $_POST['employeeid'];
+    $query = "SELECT * from Employee Where eID = '" .$employeeid ."'";
+    
+    $selected = OCI_parse($dbhabdle,$query);
+    $succuess = OCI_execute($selected);
+    $count = 0;
+    while ($row = OCI_fetch_ASSOC ($selected)){
+        $eID = $row[$EID];
+        $count = $count + 1;
+    };
+    
+    if($count = 1)
+    echo "it worked";
+    // Close the Oracle connection
+    oci_close($conn);
+
+?>
